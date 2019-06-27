@@ -1,0 +1,41 @@
+[$RootKey$\Packages\{96B36E93-F71C-4160-A4EA-26AE801D2F63}]
+@="Microsoft.DataTransformationServices.VsIntegration.DtsPackage, Microsoft.DataTransformationServices.VsIntegration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+"InprocServer32"="$WinDir$\SYSTEM32\MSCOREE.DLL"
+"Class"="Microsoft.DataTransformationServices.VsIntegration.DtsPackage"
+"CodeBase"="$RootFolder$\Microsoft.DataTransformationServices.VsIntegration.dll"
+[$RootKey$\Packages\{96B36E93-F71C-4160-A4EA-26AE801D2F63}\SatelliteDll]
+"DllName"="Microsoft.DataTransformationServices.VsIntegration.rll"
+"Path"="$RootFolder$"
+[$RootKey$\ToolsOptionsPages]
+@="#0"
+"Package"="{96B36E93-F71C-4160-A4EA-26AE801D2F63}"
+[$RootKey$\ToolsOptionsPages\DbMaintToolboxPage]
+@="#0"
+"Package"="{96B36E93-F71C-4160-A4EA-26AE801D2F63}"
+"Page"="{3b0c23e7-fcfb-4aa3-9457-fabe6cc9a493}"
+[$RootKey$\ToolboxPages\Maintenance Tasks]
+@="#155"
+"Package"="{4a0c6509-bf90-43da-abee-0aba3a8527f1}"
+"Page"="{D8E8FDFC-0157-4A10-9423-78C65DE54302}"
+"Type"="Microsoft.DataTransformationServices.VsIntegration.DbMaintToolboxPage, Microsoft.DataTransformationServices.VsIntegration"
+"PageName"="Maintenance Tasks"
+[$RootKey$\Services\{E673C351-FCE6-4B04-B8DB-EF14C0FFFD54}]
+@="{96B36E93-F71C-4160-A4EA-26AE801D2F63}"
+"Name"="IDbmaintDesignerService"
+[$RootKey$\Services\{7902C5C5-24AC-4047-B6FB-8159CDC16E41}]
+@="{96B36E93-F71C-4160-A4EA-26AE801D2F63}"
+"Name"="IDtsDesignerService"
+[$RootKey$\Packages\{4a0c6509-bf90-43da-abee-0aba3a8527f1}\DWProjects\dtproj]
+@="Data Transformations Project"
+"DocumentObject"="Microsoft.DataWarehouse.VsIntegration.Designer.Serialization.TextBufferDocumentObject, Microsoft.AnalysisServices.VsIntegration"
+"MasterTemplate"=""%InstallPath%Business Intelligence Projects\DataTransformationsProject.dtproj"
+"Project"="{159641d6-6404-4a2a-ae62-294de0fe8301}"
+"ProjectFactory" = "Microsoft.DataTransformationServices.Project.DataTransformationsProjectFactory, Microsoft.DataTransformationServices.VsIntegration"
+"ProjectManager"="Microsoft.DataTransformationServices.Project.DataTransformationsProjectManager, Microsoft.DataTransformationServices.VsIntegration"
+[$RootKey$\Packages\{4a0c6509-bf90-43da-abee-0aba3a8527f1}\DWProjects\dtproj\1]
+@="Data Transformations Project"
+"DocumentObject"="Microsoft.DataTransformationServices.Project.OnlineDtsProjectDocumentObject, Microsoft.DataTransformationServices.VsIntegration"
+"Project"="{159641d6-6404-4a2a-ae62-294de0fe8301}"
+"ProjectManager"="Microsoft.DataTransformationServices.Project.OnlineDataTransformationsProjectManager, Microsoft.DataTransformationServices.VsIntegration"
+[$RootKey$\Menus]
+"{96B36E93-F71C-4160-A4EA-26AE801D2F63}"=", Menus.ctmenu, 1"

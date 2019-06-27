@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <file name="DdsShapes.dll" hashalg="SHA1">
+    <typelib tlbid="{9C6FBCB0-4F0D-4E77-B20D-FAAB8CC8A7C5}" version="1.0" helpdir=""/>
+  </file>
+</assembly>

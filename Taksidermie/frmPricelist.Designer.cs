@@ -32,7 +32,7 @@
             this.btnDeleteAnimal = new System.Windows.Forms.Button();
             this.btnUpdateAnimal = new System.Windows.Forms.Button();
             this.btnAddAnimal = new System.Windows.Forms.Button();
-            this.txtAnimals = new System.Windows.Forms.TextBox();
+            this.txtPrice = new System.Windows.Forms.TextBox();
             this.dgvMounts = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbMountType = new System.Windows.Forms.ComboBox();
@@ -85,13 +85,13 @@
             this.btnAddAnimal.UseVisualStyleBackColor = true;
             this.btnAddAnimal.Click += new System.EventHandler(this.BtnAddAnimal_Click);
             // 
-            // txtAnimals
+            // txtPrice
             // 
-            this.txtAnimals.Location = new System.Drawing.Point(1047, 652);
-            this.txtAnimals.Name = "txtAnimals";
-            this.txtAnimals.Size = new System.Drawing.Size(257, 22);
-            this.txtAnimals.TabIndex = 17;
-            this.txtAnimals.Text = "txtPrice";
+            this.txtPrice.Location = new System.Drawing.Point(1047, 652);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(257, 22);
+            this.txtPrice.TabIndex = 17;
+            this.txtPrice.Text = "txtPrice";
             // 
             // dgvMounts
             // 
@@ -189,7 +189,7 @@
             this.Controls.Add(this.btnDeleteAnimal);
             this.Controls.Add(this.btnUpdateAnimal);
             this.Controls.Add(this.btnAddAnimal);
-            this.Controls.Add(this.txtAnimals);
+            this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.dgvMounts);
             this.Controls.Add(this.btnBack);
             this.Name = "frmPricelist";
@@ -207,7 +207,7 @@
         private System.Windows.Forms.Button btnDeleteAnimal;
         private System.Windows.Forms.Button btnUpdateAnimal;
         private System.Windows.Forms.Button btnAddAnimal;
-        private System.Windows.Forms.TextBox txtAnimals;
+        private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.DataGridView dgvMounts;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbMountType;

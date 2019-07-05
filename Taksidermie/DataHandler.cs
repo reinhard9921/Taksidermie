@@ -30,13 +30,9 @@ namespace Taksidermie
                 string select = "SELECT TOP 1 FId FROM tblFaktuur ORDER BY FId DESC";
                 SqlCommand cmd1 = new SqlCommand(select, conn);
                 i = (int)cmd1.ExecuteScalar();
-
-
-
             }
             catch (Exception e)
             {
-
                 System.Windows.Forms.MessageBox.Show("ReadInvoiceNumber()" + e.Message);
             }
             finally
@@ -183,10 +179,9 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "SELECT MAmount FROM  tblMounts WHERE AId = " + Animal + " AND TId = " + mount;
+                string select = "SELECT Mamount FROM  tblMounts WHERE AId = " + Animal + " AND TId = " + mount;
                 SqlCommand cmd1 = new SqlCommand(select, conn);
                 i = (double)(decimal)cmd1.ExecuteScalar();
-
             }
             catch (Exception e)
             {
@@ -223,6 +218,47 @@ namespace Taksidermie
                 else
                 {
                     i = "True";
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("ReadCorrectINvoice()" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return i;
+
+        }
+        public string ReadStatusReport(int FId)
+        {
+            string i = "0";
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "SELECT FStatusReport FROM  tblFaktuur WHERE FId = " + FId;
+                SqlCommand cmd1 = new SqlCommand(select, conn);
+                i = cmd1.ExecuteScalar().ToString();
+
+                if (i == "Waiting For Deposit")
+                {
+                    i = "True";
+
+                }
+                else
+                {
+                    i = "False";
                 }
 
 
@@ -333,7 +369,7 @@ namespace Taksidermie
 
         }
 
-        public void Insert(int invoicenumber, string number, int amount, string remarks, double tropheemount, double total, double deposit, double discount)
+        public void Insert(int invoicenumber, string number, int amount, string remarks, double tropheemount, double total, string date, double deposit, double discount)
         {
 
             try
@@ -342,8 +378,8 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
                 /////asdfagfsgvrdfhcdfcgdvsdgvxc
-                string select = "INSERT INTO tblTrophee(FId, TNumber, TAmount, TRemarks, TMountType, TTotal, TDeposit, TDiscount)" +
-                    " VALUES(" + invoicenumber + ",'" + number + "'," + amount + ",'" + remarks + "'," + total + "," + tropheemount + "," + deposit + "," + discount + ")";
+                string select = "INSERT INTO tblTrophee(FId, TNumber, TAmount, TRemarks, TMountType, TVellDate, TTotal, TDeposit, TDiscount)" +
+                    " VALUES(" + invoicenumber + ",'" + number + "'," + amount + ",'" + remarks + "'," + tropheemount + ",'" + date + "'," + total + "," + deposit + "," + discount + ")";
                 adapter = new SqlDataAdapter(select, conn);
 
                 adapter.Fill(dataSet, "tblTrophee");
@@ -374,7 +410,7 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
                 string select = "INSERT INTO tblFaktuur(CID) " +
-                    "VALUES(1)";
+                    "VALUES(6)";
                 adapter = new SqlDataAdapter(select, conn);
 
                 adapter.Fill(dataSet, "tblFaktuur");
@@ -395,6 +431,8 @@ namespace Taksidermie
 
 
         }
+
+
         public void DeleteInvoice(int FID)
         {
 
@@ -424,7 +462,36 @@ namespace Taksidermie
 
 
         }
-        public void InsertFaktuur(int FId, int CID, double Total, double CTotal, double Deposit)
+        public void DeleteTrophee(int TId)
+        {
+
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+                string select = "DELETE FROM tbltrophee WHERE TId = " + TId;
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblFaktuur");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("DeleteInvoice()" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+
+        }
+        public void InsertFaktuur(int FId, int CID, double Total, double CTotal, double Deposit, string DroppedOffNumber, string droppedOffClient)
         {
 
             try
@@ -433,9 +500,10 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "UPDATE tblFaktuur SET CId = " + CID + ", CidDropoff = (SELECT CName FROM tblClient WHERE CId = " + CID + "), FStatusReport = 'Waiting For Deposit'" +
-                    ", FActive = 0, FTotal = " + Total + ", " +
-                    "FDeposit = " + Deposit + ", FOustanding = " + CTotal + " WHERE FId = " + FId;
+                string select = "UPDATE tblFaktuur SET CId = " + CID + " , CidDropoff = '" + droppedOffClient +
+                    "' , FStatusReport = 'Waiting For Deposit' " +
+                    " , FActive = 0, FTotal = " + Total + " , CIDroppedOffNumber = '" + DroppedOffNumber +
+                    "' , FDeposit = " + Deposit + " , FOustanding = " + CTotal + " WHERE FId = " + FId;
 
                 adapter = new SqlDataAdapter(select, conn);
 
@@ -518,7 +586,7 @@ namespace Taksidermie
             return i;
 
         }
-        public void MakePayment(DateTime date, int FId, double Money)
+        public void MakePayment(DateTime date, int FId, string PaymentType, double Money)
         {
 
             try
@@ -527,12 +595,12 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "INSERT INTO tblPayment(FId, PAmount, PDate)" +
-                    "VALUES(" + FId + "," + Money + ",'" + date + "')";
+                string select = "INSERT INTO tblPayment(FId, PAmount, PPaymentType, PDate)" +
+                    "VALUES(" + FId + "," + Money + ",'" + PaymentType + "','" + date + "')";
 
                 adapter = new SqlDataAdapter(select, conn);
 
-                adapter.Fill(dataSet, "tblFaktuur");
+                adapter.Fill(dataSet, "tblPayment");
 
             }
             catch (Exception e)
@@ -550,7 +618,7 @@ namespace Taksidermie
 
 
         }
-        public void RunInvoiceUpdate(string name, string pname, string statusReport, string active, string sms, int FId)
+        public void RunInvoiceUpdate(string name, string pname, string pnumber, string DNumber, string pDate, string statusReport, string active, string sms, int FId)
         {
 
             try
@@ -559,7 +627,8 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "UPDATE tblFaktuur SET CIdDropoff = '" + name + "', CIdPickup = '" + pname + "', FStatusReport = '" + statusReport + "'," +
+                string select = "UPDATE tblFaktuur SET CIdDropoff = '" + name + "', CIdPickup = '" + pname + "', DatePickedUp = '" + pDate + "'," +
+                    " CIdPickedUpNumber = '" + pnumber + "', CIDroppedOffNumber = '" + DNumber + "', FStatusReport = '" + statusReport + "'," +
                     " FActive = '" + active + "', FSms = '" + sms + "' WHERE FId = " + FId;
 
                 adapter = new SqlDataAdapter(select, conn);
@@ -582,6 +651,100 @@ namespace Taksidermie
 
 
         }
+        public void UpdateStatus(int FId)
+        {
+
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "UPDATE tblFaktuur SET FStatusReport = 'Starting' WHERE FId = " + FId;
+
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblFaktuur");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("UpdateStatusReport()" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+
+        }
+
+        public void UpdateCompleted(int FId)
+        {
+
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "UPDATE tblFaktuur SET Completed = 'True' WHERE FId = " + FId;
+
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblFaktuur");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("UpdateStatusReport()" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+
+        }
+        public void UpdateConceled(int FId)
+        {
+
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "UPDATE tblFaktuur SET Canceled = 'True' WHERE FId = " + FId;
+
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblFaktuur");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("UpdateStatusReport()" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+
+        }
         public DataSet ReadFaktuur()
         {
 
@@ -591,10 +754,11 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "Select f.FId AS 'Faktuur ID', c.CName AS 'Client Name', f.CIdDropoff AS 'Client Dropped off'" +
-                    ", f.CIdPickup AS 'Client Picked Up',  f.FStatusReport AS 'Status Report'" +
+                string select = "Select f.FId AS 'Faktuur ID', c.CName + ' ' + c.CSurname AS 'Client Name', f.CIdDropoff AS 'Client Dropped off'," +
+                    " f.CIDroppedOffNumber as 'Dropped off number'" +
+                    ", f.CIdPickup AS 'Client Picked Up', f.CIdPickedUpNumber as 'Picked Up Number', f.DatePickedUp  as 'Date Picked Up', f.FStatusReport AS 'Status Report'" +
                     ", f.FActive AS 'Active', f.FTotal AS 'Total', f.FDeposit AS 'Deposit', f.FOustanding AS 'Outstanding Amount', f.FSms AS 'SMS' " +
-                    "FROM tblFaktuur f INNER JOIN tblClient c ON f.CId = c.CId ORDER BY FId DESC";
+                    "FROM tblFaktuur f INNER JOIN tblClient c ON f.CId = c.CId WHERE f.Completed is null AND f.Canceled is null ORDER BY FId DESC";
                 adapter = new SqlDataAdapter(select, conn);
 
                 adapter.Fill(dataSet, "tblFaktuur");
@@ -624,7 +788,8 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "SELECT a.AAnimalType, mt.TMountType " +
+                string select = "SELECT t.TId, t.TNumber, t.TAmount, a.AAnimalType, mt.TMountType, t.TVellDate, " +
+                    "t.TRemarks, t.TDeposit, t.TDiscount, t.TTotal " +
                     "FROM tblTrophee t " +
                     "INNER JOIN tblMounts m " +
                     "ON t.TMountType = m.MId " +
@@ -662,9 +827,22 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "SELECT * FROM tblFaktuur WHERE FId LIKE '%" + Search + "%' or CId LIKE '%" + Search + "%' " +
-                    "or FNumber LIKE '%" + Search + "%' or TId LIKE '%" + Search + "%' or CIdPickup LIKE '%" + Search + "%' " +
-                    "or CidDropoff LIKE '%" + Search + "%' or PPamentID LIKE '%" + Search + "%' ";
+                string select = "Select f.FId AS 'Faktuur ID', c.CName AS 'Client Name', f.CIdDropoff AS 'Client Dropped off'," +
+                    " f.CIDroppedOffNumber as 'Dropped off number'" +
+                    ", f.CIdPickup AS 'Client Picked Up', f.CIdPickedUpNumber as 'Picked Up Number', f.DatePickedUp  as 'Date Picked Up', f.FStatusReport AS 'Status Report'" +
+                    ", f.FActive AS 'Active', f.FTotal AS 'Total', f.FDeposit AS 'Deposit', f.FOustanding AS 'Outstanding Amount', f.FSms AS 'SMS' " +
+                    "FROM tblFaktuur f INNER JOIN tblClient c ON f.CId = c.CId WHERE f.FId LIKE '%" + Search + "%' AND f.Completed is null AND" +
+                    " f.Canceled is null or c.CName LIKE '%" + Search + "%' AND f.Completed is null AND f.Canceled is null " +
+                    "or f.CIdPickUp LIKE '%" + Search + "%' AND f.Completed is null AND f.Canceled is null" +
+                    " or f.CIdDropoff LIKE '%" + Search + "%' AND f.Completed is null AND f.Canceled is null " +
+                    "or f.FStatusReport LIKE '%" + Search + "%' AND f.Completed is null AND f.Canceled is null" +
+                    " or f.FActive LIKE ' % " + Search + " AND f.Completed is null AND f.Canceled is null %" +
+                    "' or f.FTotal LIKE '%" + Search + "%' AND f.Completed is null AND f.Canceled is null" +
+                    "  or f.FDeposit LIKE '% " + Search + " AND f.Completed is null AND f.Canceled is null" +
+                    " %'or f.FOustanding LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null " +
+                    "or f.CIdPickedUpNumber LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null" +
+                    " or f.DatePickedUp LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null" +
+                    " or f.CIDroppedOffNumber LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null";
 
                 adapter = new SqlDataAdapter(select, conn);
 
@@ -675,6 +853,107 @@ namespace Taksidermie
             {
 
                 System.Windows.Forms.MessageBox.Show("SearchFaktuur" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return dataSet;
+
+        }
+
+        public DataSet SearchClient(string Search)
+        {
+            dataSet = null;
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "SELECT * FROM tblClient WHERE CId LIKE '%" + Search + "%' or CName LIKE '%" + Search + "%' " +
+                    "or CSurname LIKE '%" + Search + "%' or CEmailAddress LIKE '%" + Search + "%' or CCell LIKE '%" + Search + "%' " +
+                    "or CCell1 LIKE '%" + Search + "%' or CCredit LIKE '%" + Search + "%' ";
+
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblClient");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("SearchClient" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return dataSet;
+
+        }
+        public DataSet SearchInventory(string Search)
+        {
+            dataSet = null;
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "SELECT * FROM tblInvintory WHERE IId LIKE '%" + Search + "%' or IItem LIKE '%" + Search + "%' " +
+                    "or IAnimalType LIKE '%" + Search + "%' or IAmount LIKE '%" + Search + "%'";
+
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblInvintory");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("SearchClient" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return dataSet;
+
+        }
+        public DataSet SearchPayment(string Search)
+        {
+            dataSet = null;
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "SELECT * FROM tblPayment WHERE FId LIKE '%" + Search + "%' or PAmount LIKE '%" + Search + "%' " +
+                    "or PPaymentType LIKE '%" + Search + "%' or PDate LIKE '%" + Search + "%'";
+
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblPayment");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("SearchClient" + e.Message);
             }
             finally
             {
@@ -762,6 +1041,42 @@ namespace Taksidermie
             {
 
                 System.Windows.Forms.MessageBox.Show("UpdateAnimalType " + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+        public void UpdateTrophee(string TNumber, int TAmount, string TRemarks, int MountType, string date, double TDeposit, double TDiscount, double TTotal, int TId)
+        {
+            try
+            {
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+
+                string insert = "UPDATE tblTrophee " +
+                    "SET TNumber = " + TNumber +
+                    ", TAmount = " + TAmount +
+                    ", TRemarks = '" + TRemarks + "'" +
+                    ", TMountType = " + MountType +
+                    ", TVellDate = '" + date + "'" +
+                    ", TDeposit = " + TDeposit +
+                    ", TDiscount = " + TDiscount +
+                    ", TTotal = " + TTotal +
+                    "WHERE TId = " + TId;
+                SqlCommand cmd = new SqlCommand(insert, conn);
+                cmd.ExecuteScalar();
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("update trophee " + e.Message);
             }
             finally
             {
@@ -964,7 +1279,7 @@ namespace Taksidermie
             }
 
         }
-        public void AddInventory(string Item, int Amount)
+        public void AddInventory(string Item, string aType, int Amount)
         {
             try
             {
@@ -972,8 +1287,8 @@ namespace Taksidermie
                 conn.Open();
 
 
-                string insert = "INSERT INTO tblInvintory (IItem, IAmount)" +
-                    " VALUES('" + Item + "', " + Amount + ")";
+                string insert = "INSERT INTO tblInvintory (IItem, IAnimalType, IAmount)" +
+                    " VALUES('" + Item + "', '" + aType + "', " + Amount + ")";
                 SqlCommand cmd = new SqlCommand(insert, conn);
                 cmd.ExecuteNonQuery();
 
@@ -981,7 +1296,7 @@ namespace Taksidermie
             catch (Exception e)
             {
 
-                System.Windows.Forms.MessageBox.Show("AddINventroy " + e.Message);
+                System.Windows.Forms.MessageBox.Show("addInventory " + e.Message);
             }
             finally
             {
@@ -992,7 +1307,7 @@ namespace Taksidermie
             }
 
         }
-        public void UpdateInventroy(string item, int Amount, int IId)
+        public void UpdateInventroy(string item, int Amount, string Animal, int IId)
         {
             try
             {
@@ -1000,7 +1315,7 @@ namespace Taksidermie
                 conn.Open();
 
 
-                string insert = "UPDATE tblINvintory SET IItem = '" + item + "', IAmount = " + Amount + " WHERE IId = " + IId;
+                string insert = "UPDATE tblINvintory SET IItem = '" + item + "', IAmount = " + Amount + ", IAnimalType = '" + Animal + "' WHERE IId = " + IId;
                 SqlCommand cmd = new SqlCommand(insert, conn);
                 cmd.ExecuteNonQuery();
 
@@ -1160,6 +1475,36 @@ namespace Taksidermie
 
             return dataSet;
         }
+        public DataSet ReadPaymentHistory()
+        {
+
+            try
+            {
+                dataSet = new DataSet();
+                conn = new SqlConnection(conString);
+                conn.Open();
+
+                string select = "SELECT FId as 'Faktuur ID', PAmount as 'Amount', PPaymentType as 'Payment Type', PDate as 'Date' FROM tblPayment";
+                adapter = new SqlDataAdapter(select, conn);
+
+                adapter.Fill(dataSet, "tblPayment");
+
+            }
+            catch (Exception e)
+            {
+
+                System.Windows.Forms.MessageBox.Show("ReadAnimalType()" + e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return dataSet;
+        }
         public DataSet ReadMountType()
         {
 
@@ -1267,7 +1612,7 @@ namespace Taksidermie
                 string select = "SELECT * FROM tblInvintory";
                 adapter = new SqlDataAdapter(select, conn);
 
-                adapter.Fill(dataSet, "tblAnimal");
+                adapter.Fill(dataSet, "tblInvintory");
 
             }
             catch (Exception e)
@@ -1294,7 +1639,7 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "SELECT CId FROM  tblCLient WHERE CName = '" + name + "' OR CCell = '" + cell + "' OR CCell1 = '" + cell1 + "'";
+                string select = "SELECT CId FROM  tblCLient WHERE CName + ' ' + CSurname = '" + name + "' OR CCell = '" + cell + "' OR CCell1 = '" + cell1 + "'";
                 SqlCommand cmd1 = new SqlCommand(select, conn);
                 i = (int)cmd1.ExecuteScalar();
 

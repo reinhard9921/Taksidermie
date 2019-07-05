@@ -37,6 +37,7 @@
             this.manageInventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lookupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.priceListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yearlyIncreaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,14 @@
             this.chbActive = new System.Windows.Forms.CheckBox();
             this.richtxtStatus = new System.Windows.Forms.RichTextBox();
             this.btnUpdateInvoice = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtPickedUpNumber = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dtpPDate = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtClientDropoffNumber = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMounts)).BeginInit();
             this.SuspendLayout();
@@ -68,12 +77,14 @@
             this.invetoryToolStripMenuItem,
             this.lookupToolStripMenuItem,
             this.priceListToolStripMenuItem,
+            this.paymentHistoryToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1499, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1709, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MenuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -137,6 +148,13 @@
             this.priceListToolStripMenuItem.Text = "Price List";
             this.priceListToolStripMenuItem.Click += new System.EventHandler(this.PriceListToolStripMenuItem_Click);
             // 
+            // paymentHistoryToolStripMenuItem
+            // 
+            this.paymentHistoryToolStripMenuItem.Name = "paymentHistoryToolStripMenuItem";
+            this.paymentHistoryToolStripMenuItem.Size = new System.Drawing.Size(130, 24);
+            this.paymentHistoryToolStripMenuItem.Text = "Payment History";
+            this.paymentHistoryToolStripMenuItem.Click += new System.EventHandler(this.PaymentHistoryToolStripMenuItem_Click);
+            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -161,13 +179,16 @@
             // dgvMounts
             // 
             this.dgvMounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMounts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMounts.Location = new System.Drawing.Point(12, 103);
             this.dgvMounts.Name = "dgvMounts";
             this.dgvMounts.RowHeadersWidth = 51;
             this.dgvMounts.RowTemplate.Height = 24;
-            this.dgvMounts.Size = new System.Drawing.Size(1475, 474);
+            this.dgvMounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMounts.Size = new System.Drawing.Size(1685, 688);
             this.dgvMounts.TabIndex = 1;
             this.dgvMounts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMounts_CellContentClick);
+            this.dgvMounts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMounts_CellDoubleClick);
             this.dgvMounts.SelectionChanged += new System.EventHandler(this.dgvMounts_SelectionChanged);
             this.dgvMounts.DoubleClick += new System.EventHandler(this.DgvMounts_DoubleClick);
             // 
@@ -200,7 +221,7 @@
             // 
             // btnNewInvoice
             // 
-            this.btnNewInvoice.Location = new System.Drawing.Point(15, 600);
+            this.btnNewInvoice.Location = new System.Drawing.Point(15, 798);
             this.btnNewInvoice.Name = "btnNewInvoice";
             this.btnNewInvoice.Size = new System.Drawing.Size(116, 30);
             this.btnNewInvoice.TabIndex = 5;
@@ -210,7 +231,7 @@
             // 
             // btnPayment
             // 
-            this.btnPayment.Location = new System.Drawing.Point(15, 636);
+            this.btnPayment.Location = new System.Drawing.Point(15, 834);
             this.btnPayment.Name = "btnPayment";
             this.btnPayment.Size = new System.Drawing.Size(116, 31);
             this.btnPayment.TabIndex = 6;
@@ -220,24 +241,24 @@
             // 
             // txtClientDropoff
             // 
-            this.txtClientDropoff.Location = new System.Drawing.Point(628, 622);
+            this.txtClientDropoff.Location = new System.Drawing.Point(187, 817);
             this.txtClientDropoff.Name = "txtClientDropoff";
-            this.txtClientDropoff.Size = new System.Drawing.Size(100, 22);
+            this.txtClientDropoff.Size = new System.Drawing.Size(165, 22);
             this.txtClientDropoff.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(625, 599);
+            this.label3.Location = new System.Drawing.Point(184, 794);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 17);
+            this.label3.Size = new System.Drawing.Size(125, 17);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Client Name";
+            this.label3.Text = "Client Dropped Off";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(912, 599);
+            this.label4.Location = new System.Drawing.Point(912, 797);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 17);
             this.label4.TabIndex = 10;
@@ -245,24 +266,24 @@
             // 
             // txtClientPickUp
             // 
-            this.txtClientPickUp.Location = new System.Drawing.Point(628, 671);
+            this.txtClientPickUp.Location = new System.Drawing.Point(389, 868);
             this.txtClientPickUp.Name = "txtClientPickUp";
-            this.txtClientPickUp.Size = new System.Drawing.Size(100, 22);
+            this.txtClientPickUp.Size = new System.Drawing.Size(165, 22);
             this.txtClientPickUp.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(625, 650);
+            this.label5.Location = new System.Drawing.Point(386, 848);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 17);
+            this.label5.Size = new System.Drawing.Size(109, 17);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Client Name";
+            this.label5.Text = "Client Picked up";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(759, 599);
+            this.label7.Location = new System.Drawing.Point(759, 797);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(37, 17);
             this.label7.TabIndex = 14;
@@ -270,7 +291,7 @@
             // 
             // txtSms
             // 
-            this.txtSms.Location = new System.Drawing.Point(759, 622);
+            this.txtSms.Location = new System.Drawing.Point(759, 820);
             this.txtSms.Name = "txtSms";
             this.txtSms.Size = new System.Drawing.Size(100, 22);
             this.txtSms.TabIndex = 13;
@@ -278,7 +299,7 @@
             // chbActive
             // 
             this.chbActive.AutoSize = true;
-            this.chbActive.Location = new System.Drawing.Point(759, 670);
+            this.chbActive.Location = new System.Drawing.Point(759, 868);
             this.chbActive.Name = "chbActive";
             this.chbActive.Size = new System.Drawing.Size(68, 21);
             this.chbActive.TabIndex = 19;
@@ -287,7 +308,7 @@
             // 
             // richtxtStatus
             // 
-            this.richtxtStatus.Location = new System.Drawing.Point(915, 619);
+            this.richtxtStatus.Location = new System.Drawing.Point(915, 817);
             this.richtxtStatus.Name = "richtxtStatus";
             this.richtxtStatus.Size = new System.Drawing.Size(304, 74);
             this.richtxtStatus.TabIndex = 20;
@@ -295,7 +316,7 @@
             // 
             // btnUpdateInvoice
             // 
-            this.btnUpdateInvoice.Location = new System.Drawing.Point(1330, 627);
+            this.btnUpdateInvoice.Location = new System.Drawing.Point(1263, 825);
             this.btnUpdateInvoice.Name = "btnUpdateInvoice";
             this.btnUpdateInvoice.Size = new System.Drawing.Size(75, 48);
             this.btnUpdateInvoice.TabIndex = 21;
@@ -303,11 +324,89 @@
             this.btnUpdateInvoice.UseVisualStyleBackColor = true;
             this.btnUpdateInvoice.Click += new System.EventHandler(this.BtnUpdateInvoice_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(572, 848);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(165, 17);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Client Picked Up Number";
+            // 
+            // txtPickedUpNumber
+            // 
+            this.txtPickedUpNumber.Location = new System.Drawing.Point(575, 868);
+            this.txtPickedUpNumber.Name = "txtPickedUpNumber";
+            this.txtPickedUpNumber.Size = new System.Drawing.Size(155, 22);
+            this.txtPickedUpNumber.TabIndex = 22;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(572, 797);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(106, 17);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Date Picked Up";
+            // 
+            // dtpPDate
+            // 
+            this.dtpPDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpPDate.Location = new System.Drawing.Point(575, 820);
+            this.dtpPDate.Name = "dtpPDate";
+            this.dtpPDate.Size = new System.Drawing.Size(155, 22);
+            this.dtpPDate.TabIndex = 25;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(386, 794);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(177, 17);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Client Dropped Off number";
+            // 
+            // txtClientDropoffNumber
+            // 
+            this.txtClientDropoffNumber.Location = new System.Drawing.Point(389, 817);
+            this.txtClientDropoffNumber.Name = "txtClientDropoffNumber";
+            this.txtClientDropoffNumber.Size = new System.Drawing.Size(165, 22);
+            this.txtClientDropoffNumber.TabIndex = 26;
+            this.txtClientDropoffNumber.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1415, 825);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(101, 48);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "Complete Invoice";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1563, 825);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 48);
+            this.button2.TabIndex = 29;
+            this.button2.Text = "Cancel Invoice";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // frmMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1499, 703);
+            this.ClientSize = new System.Drawing.Size(1709, 900);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtClientDropoffNumber);
+            this.Controls.Add(this.dtpPDate);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtPickedUpNumber);
             this.Controls.Add(this.btnUpdateInvoice);
             this.Controls.Add(this.richtxtStatus);
             this.Controls.Add(this.chbActive);
@@ -368,6 +467,15 @@
         private System.Windows.Forms.CheckBox chbActive;
         private System.Windows.Forms.RichTextBox richtxtStatus;
         private System.Windows.Forms.Button btnUpdateInvoice;
+        private System.Windows.Forms.ToolStripMenuItem paymentHistoryToolStripMenuItem;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtPickedUpNumber;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dtpPDate;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtClientDropoffNumber;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

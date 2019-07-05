@@ -45,6 +45,22 @@ namespace Taksidermie
         int id;
         string name, surname, email, cell, cell1;
 
+        private void TxtSearchFaktuur_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearchFaktuur.Text == "")
+            {
+                dgvMounts.DataSource = null;
+                dgvMounts.DataSource = dh.ReadClient();
+                dgvMounts.DataMember = "tblClient";
+            }
+            else
+            {
+                dgvMounts.DataSource = null;
+                dgvMounts.DataSource = dh.SearchFaktuur(txtSearchFaktuur.Text);
+                dgvMounts.DataMember = "tblFaktuur";
+            }
+        }
+
         private void DgvMounts_SelectionChanged(object sender, EventArgs e)
         {
             {

@@ -32,8 +32,10 @@
             this.btnAddItem = new System.Windows.Forms.Button();
             this.txtAmountInStock = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtItem = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.cmbItem = new System.Windows.Forms.ComboBox();
+            this.cmbAnimalType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label8
@@ -72,32 +74,58 @@
             this.label3.TabIndex = 25;
             this.label3.Text = "Amount In Stock";
             // 
-            // txtItem
-            // 
-            this.txtItem.Location = new System.Drawing.Point(74, 136);
-            this.txtItem.Name = "txtItem";
-            this.txtItem.Size = new System.Drawing.Size(100, 22);
-            this.txtItem.TabIndex = 24;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 116);
+            this.label2.Location = new System.Drawing.Point(71, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 17);
             this.label2.TabIndex = 23;
             this.label2.Text = "Item";
+            // 
+            // cmbItem
+            // 
+            this.cmbItem.FormattingEnabled = true;
+            this.cmbItem.Items.AddRange(new object[] {
+            "Cape",
+            "Full Skin",
+            "Back Skin",
+            "Pote",
+            "Stert"});
+            this.cmbItem.Location = new System.Drawing.Point(74, 106);
+            this.cmbItem.Name = "cmbItem";
+            this.cmbItem.Size = new System.Drawing.Size(121, 24);
+            this.cmbItem.TabIndex = 29;
+            // 
+            // cmbAnimalType
+            // 
+            this.cmbAnimalType.FormattingEnabled = true;
+            this.cmbAnimalType.Location = new System.Drawing.Point(74, 153);
+            this.cmbAnimalType.Name = "cmbAnimalType";
+            this.cmbAnimalType.Size = new System.Drawing.Size(121, 24);
+            this.cmbAnimalType.TabIndex = 31;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(71, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Animal Type";
             // 
             // frmAddInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(277, 329);
+            this.Controls.Add(this.cmbAnimalType);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbItem);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.txtAmountInStock);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtItem);
             this.Controls.Add(this.label2);
             this.Name = "frmAddInventory";
             this.Text = "frmAddInventory";
@@ -113,7 +141,9 @@
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.TextBox txtAmountInStock;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtItem;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbItem;
+        private System.Windows.Forms.ComboBox cmbAnimalType;
+        private System.Windows.Forms.Label label1;
     }
 }

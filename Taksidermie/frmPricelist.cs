@@ -105,7 +105,7 @@ namespace Taksidermie
                     string MountType = dgvMounts.Rows[index].Cells[2].Value.ToString();
                     cmbMountType.Text = MountType;
                     double Amount = (double)(decimal)dgvMounts.Rows[index].Cells[3].Value;
-                    cmbMountType.Text = Amount.ToString();
+                    txtPrice.Text = Amount.ToString();
                     
 
 
@@ -123,7 +123,7 @@ namespace Taksidermie
         {
             int AId = dh.SelectAnimalType(cmbAnimalType.Text);
             int TId = dh.SelectMountType(cmbMountType.Text);
-            double MAmount = double.Parse(txtAnimals.Text);
+            double MAmount = double.Parse(txtPrice.Text);
             dh.AddMount(AId,TId, MAmount);
             dgvMounts.DataSource = null;
             dgvMounts.DataSource = dh.ReadMounts();
@@ -135,7 +135,7 @@ namespace Taksidermie
         {
             int AId = dh.SelectAnimalType(cmbAnimalType.Text);
             int TId = dh.SelectMountType(cmbMountType.Text);
-            double MAmount = double.Parse(txtAnimals.Text);
+            double MAmount = double.Parse(txtPrice.Text);
             dh.UpdateMount(MAmount ,AId, TId, id);
             dgvMounts.DataSource = null;
             dgvMounts.DataSource = dh.ReadMounts();

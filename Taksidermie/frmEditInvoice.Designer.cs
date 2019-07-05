@@ -52,6 +52,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrophees)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,30 +168,33 @@
             this.dgvTrophees.Name = "dgvTrophees";
             this.dgvTrophees.RowHeadersWidth = 51;
             this.dgvTrophees.RowTemplate.Height = 24;
-            this.dgvTrophees.Size = new System.Drawing.Size(1011, 358);
+            this.dgvTrophees.Size = new System.Drawing.Size(1197, 358);
             this.dgvTrophees.TabIndex = 44;
+            this.dgvTrophees.SelectionChanged += new System.EventHandler(this.DgvTrophees_SelectionChanged);
             // 
             // btnDone
             // 
-            this.btnDone.Location = new System.Drawing.Point(948, 717);
+            this.btnDone.Location = new System.Drawing.Point(1130, 717);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 35);
             this.btnDone.TabIndex = 42;
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.BtnDone_Click);
             // 
             // btnAddTrophree
             // 
-            this.btnAddTrophree.Location = new System.Drawing.Point(798, 717);
+            this.btnAddTrophree.Location = new System.Drawing.Point(980, 717);
             this.btnAddTrophree.Name = "btnAddTrophree";
             this.btnAddTrophree.Size = new System.Drawing.Size(144, 35);
             this.btnAddTrophree.TabIndex = 41;
-            this.btnAddTrophree.Text = "Add Throphee";
+            this.btnAddTrophree.Text = "Update Trophee";
             this.btnAddTrophree.UseVisualStyleBackColor = true;
+            this.btnAddTrophree.Click += new System.EventHandler(this.BtnAddTrophree_Click);
             // 
             // richeditRemarks
             // 
-            this.richeditRemarks.Location = new System.Drawing.Point(598, 599);
+            this.richeditRemarks.Location = new System.Drawing.Point(780, 599);
             this.richeditRemarks.Name = "richeditRemarks";
             this.richeditRemarks.Size = new System.Drawing.Size(425, 99);
             this.richeditRemarks.TabIndex = 40;
@@ -213,7 +219,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(595, 579);
+            this.label4.Location = new System.Drawing.Point(777, 579);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 17);
             this.label4.TabIndex = 39;
@@ -263,11 +269,41 @@
             this.label5.Text = "Client Name";
             this.label5.Click += new System.EventHandler(this.Label5_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(447, 579);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(143, 17);
+            this.label6.TabIndex = 58;
+            this.label6.Text = "Date Action Happend";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(450, 598);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(140, 22);
+            this.dateTimePicker1.TabIndex = 59;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(830, 717);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(144, 35);
+            this.button1.TabIndex = 60;
+            this.button1.Text = "Cancel Trophee";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // frmEditInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1103, 766);
+            this.ClientSize = new System.Drawing.Size(1221, 766);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbCell);
             this.Controls.Add(this.label11);
@@ -327,5 +363,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button1;
     }
 }

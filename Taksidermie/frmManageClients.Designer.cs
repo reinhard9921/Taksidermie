@@ -104,6 +104,7 @@
             this.txtSearchFaktuur.Name = "txtSearchFaktuur";
             this.txtSearchFaktuur.Size = new System.Drawing.Size(138, 22);
             this.txtSearchFaktuur.TabIndex = 10;
+            this.txtSearchFaktuur.TextChanged += new System.EventHandler(this.TxtSearchFaktuur_TextChanged);
             // 
             // frmManageClients
             // 

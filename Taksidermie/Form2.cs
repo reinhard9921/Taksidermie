@@ -68,7 +68,7 @@ namespace Taksidermie
                 double mountType = dh.ReturnMountType(dh.SelectAnimalType(cmbAnimalType.Text), dh.SelectMountType(cmbMountType.Text));
                 double deposit = CalculatePrice / 2;
                 CalculateTotalPrice = CalculateTotalPrice + dh.ReadTotalPrice(AnimalType, MountType);
-                lstTrophee.Add(new Trophee(invoicenumber, number, 1, remarks,  mountType, CalculatePrice, deposit, TAdiscount));
+                lstTrophee.Add(new Trophee(invoicenumber, number, 1, remarks, cmbAnimalType.Text, cmbMountType.Text, "", CalculatePrice, deposit, TAdiscount));
 
 
                 dgvTrophees.DataSource = null;
@@ -84,12 +84,16 @@ namespace Taksidermie
 
         private void BtnDone_Click(object sender, EventArgs e)
         {
+
+            ClientID = dh.ClientID(cmbNameSurname.Text, cmbCell.Text, cmbPhoneNumber.Text);
             double deposit;
 
             foreach (Trophee item in lstTrophee)
             {
 
-                dh.Insert(item.Invoicenumber, item.Number, item.Amount, item.Remarks, item.Total, item.Tropheemountid, item.Deposit, item.Discount1);
+                double mountType = dh.ReturnMountType(dh.SelectAnimalType(item.Animaltype), dh.SelectMountType(item.Mounttype));
+
+                dh.Insert(item.Invoicenumber, item.Number, item.Amount, item.Remarks, mountType, item.Total, item.Date, item.Deposit, item.Discount);
 
             }
             int InvoiceNumber = int.Parse(lblInvoice.Text);
@@ -111,8 +115,7 @@ namespace Taksidermie
                 dh.UpdateCredit(credit, ClientID);
 
             }
-            ClientID = dh.ClientID(cmbNameSurname.Text, cmbCell.Text, cmbPhoneNumber.Text);
-            dh.InsertFaktuur(InvoiceNumber, ClientID, CalculateTotalPrice, CTotal, deposit);
+            dh.InsertFaktuur(InvoiceNumber, ClientID, CalculateTotalPrice, CTotal, deposit, txtClientNumber.Text, txtClientName.Text);
             this.Close();
             MyEventHandler?.Invoke();
 
@@ -128,7 +131,6 @@ namespace Taksidermie
 
         private void CmbNameSurname_SelectedIndexChanged(object sender, EventArgs e)
         {
-          //  ClientID = dh.GetClientName(cmbNameSurname.Text, cmbCell.Text, cmbPhoneNumber.Text);
         }
 
         private void CmbCell_SelectedIndexChanged(object sender, EventArgs e)
@@ -150,11 +152,11 @@ namespace Taksidermie
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT CId, CName FROM tblClient", conn);
+                SqlCommand cmd = new SqlCommand("SELECT CId, CName + ' ' + CSurname as 'FullName' FROM tblClient", conn);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 da.Fill(ds);
-                cmbNameSurname.DisplayMember = "CName";
+                cmbNameSurname.DisplayMember = "FullName";
                 cmbNameSurname.ValueMember = "CId";
                 cmbNameSurname.DataSource = ds.Tables[0];
             }
@@ -185,7 +187,7 @@ namespace Taksidermie
                 cmbPhoneNumber.ValueMember = "CId";
                 cmbPhoneNumber.DataSource = ds.Tables[0];
             }
-            catch (Exception ex)
+            catch (Exception r)
             {
                 MessageBox.Show("Error in FIllComboBoxNum1");
             }

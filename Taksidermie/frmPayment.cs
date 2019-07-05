@@ -13,8 +13,10 @@ namespace Taksidermie
     public partial class frmPayment : Form
     {
         int publicid;
-        public frmPayment(int id)
+        int Check1;
+        public frmPayment(int id, int Check)
         {
+            Check1 = Check;
             publicid = id;
             InitializeComponent();
         }
@@ -24,6 +26,8 @@ namespace Taksidermie
         double Outstanding;
         public delegate void MyHandler();
         public event MyHandler MyEventHandler;
+        public delegate void MyHandler2();
+        public event MyHandler2 MySecondEventHandler;
         private void Label6_Click(object sender, EventArgs e)
         {
 
@@ -36,13 +40,18 @@ namespace Taksidermie
             double cred1;
             int deposit;
             amount = double.Parse(txtSurname.Text);
-            dh.MakePayment(dateTimePicker1.Value.Date, publicid, amount);
+            dh.MakePayment(dateTimePicker1.Value.Date, publicid, cmbPaymentType.Text, amount);
             Outstanding = dh.GetOutstanding(publicid);
 
             if (chbDeposit.Checked == true)
             {
                 deposit = 1;
+                MySecondEventHandler?.Invoke();
 
+            }
+            else if (chbDeposit.Checked == true && Check1 == 1 || chbDeposit.Checked == false && Check1 == 1)
+            {
+                deposit = 1;
             }
             else
             {

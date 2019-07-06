@@ -39,8 +39,6 @@
             this.priceListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yearlyIncreaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvMounts = new System.Windows.Forms.DataGridView();
             this.txtSearchFaktuur = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -116,22 +114,22 @@
             this.addToInventoryToolStripMenuItem,
             this.manageInventoryToolStripMenuItem});
             this.invetoryToolStripMenuItem.Name = "invetoryToolStripMenuItem";
-            this.invetoryToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
-            this.invetoryToolStripMenuItem.Text = "Invetory";
+            this.invetoryToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.invetoryToolStripMenuItem.Text = "Stock";
             this.invetoryToolStripMenuItem.Click += new System.EventHandler(this.InvetoryToolStripMenuItem_Click);
             // 
             // addToInventoryToolStripMenuItem
             // 
             this.addToInventoryToolStripMenuItem.Name = "addToInventoryToolStripMenuItem";
-            this.addToInventoryToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
-            this.addToInventoryToolStripMenuItem.Text = "Add To Inventory";
+            this.addToInventoryToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.addToInventoryToolStripMenuItem.Text = "Add To Stock";
             this.addToInventoryToolStripMenuItem.Click += new System.EventHandler(this.AddToInventoryToolStripMenuItem_Click);
             // 
             // manageInventoryToolStripMenuItem
             // 
             this.manageInventoryToolStripMenuItem.Name = "manageInventoryToolStripMenuItem";
-            this.manageInventoryToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
-            this.manageInventoryToolStripMenuItem.Text = "Manage Inventory";
+            this.manageInventoryToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.manageInventoryToolStripMenuItem.Text = "Manage Stock";
             this.manageInventoryToolStripMenuItem.Click += new System.EventHandler(this.ManageInventoryToolStripMenuItem_Click);
             // 
             // lookupToolStripMenuItem
@@ -157,24 +155,10 @@
             // 
             // settingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setConnectionToolStripMenuItem,
-            this.yearlyIncreaseToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // setConnectionToolStripMenuItem
-            // 
-            this.setConnectionToolStripMenuItem.Name = "setConnectionToolStripMenuItem";
-            this.setConnectionToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
-            this.setConnectionToolStripMenuItem.Text = "Set Connection";
-            // 
-            // yearlyIncreaseToolStripMenuItem
-            // 
-            this.yearlyIncreaseToolStripMenuItem.Name = "yearlyIncreaseToolStripMenuItem";
-            this.yearlyIncreaseToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
-            this.yearlyIncreaseToolStripMenuItem.Text = "Yearly Increase";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
+            this.settingsToolStripMenuItem.Text = "Invoice";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // dgvMounts
             // 
@@ -455,8 +439,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnNewInvoice;
         private System.Windows.Forms.Button btnPayment;
-        private System.Windows.Forms.ToolStripMenuItem setConnectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem yearlyIncreaseToolStripMenuItem;
         private System.Windows.Forms.TextBox txtClientDropoff;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

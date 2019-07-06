@@ -59,7 +59,7 @@ namespace Taksidermie
 
         private void BtnAddItem_Click(object sender, EventArgs e)
         {
-            dh.AddInventory(cmbItem.Text, cmbAnimalType.Text, int.Parse(txtAmountInStock.Text));
+            dh.AddInventory(cmbItem.Text, cmbAnimalType.Text, int.Parse(txtAmountInStock.Text), int.Parse(txtInvoiceNumber.Text));
             this.Close();
         }
     }

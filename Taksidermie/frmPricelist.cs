@@ -31,6 +31,11 @@ namespace Taksidermie
         DataHandler dh = new DataHandler();
         private void FrmPricelist_Load(object sender, EventArgs e)
         {
+
+            FillComboboxMountType();
+
+            FillComboboxAnimalType();
+
             dgvMounts.DataSource = dh.ReadMounts();
             dgvMounts.DataMember = "tblMounts";
         }

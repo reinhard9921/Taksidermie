@@ -491,7 +491,7 @@ namespace Taksidermie
 
 
         }
-        public void InsertFaktuur(int FId, int CID, double Total, double CTotal, double Deposit, string DroppedOffNumber, string droppedOffClient)
+        public void InsertFaktuur(int FId, int CID, double Total, double CTotal, double Deposit, string DroppedOffNumber, string droppedOffClient, string employee)
         {
 
             try
@@ -503,7 +503,7 @@ namespace Taksidermie
                 string select = "UPDATE tblFaktuur SET CId = " + CID + " , CidDropoff = '" + droppedOffClient +
                     "' , FStatusReport = 'Waiting For Deposit' " +
                     " , FActive = 0, FTotal = " + Total + " , CIDroppedOffNumber = '" + DroppedOffNumber +
-                    "' , FDeposit = " + Deposit + " , FOustanding = " + CTotal + " WHERE FId = " + FId;
+                    "' , FDeposit = " + Deposit + " , FOustanding = " + CTotal + " , Employee = '" + employee + "' WHERE FId = " + FId;
 
                 adapter = new SqlDataAdapter(select, conn);
 
@@ -757,7 +757,7 @@ namespace Taksidermie
                 string select = "Select f.FId AS 'Faktuur ID', c.CName + ' ' + c.CSurname AS 'Client Name', f.CIdDropoff AS 'Client Dropped off'," +
                     " f.CIDroppedOffNumber as 'Dropped off number'" +
                     ", f.CIdPickup AS 'Client Picked Up', f.CIdPickedUpNumber as 'Picked Up Number', f.DatePickedUp  as 'Date Picked Up', f.FStatusReport AS 'Status Report'" +
-                    ", f.FActive AS 'Active', f.FTotal AS 'Total', f.FDeposit AS 'Deposit', f.FOustanding AS 'Outstanding Amount', f.FSms AS 'SMS' " +
+                    ", f.FActive AS 'Active', f.FTotal AS 'Total', f.FDeposit AS 'Deposit Payable', f.FOustanding AS 'Outstanding Amount', f.FSms AS 'SMS', f.Employee AS 'Handler' " +
                     "FROM tblFaktuur f INNER JOIN tblClient c ON f.CId = c.CId WHERE f.Completed is null AND f.Canceled is null ORDER BY FId DESC";
                 adapter = new SqlDataAdapter(select, conn);
 
@@ -827,10 +827,10 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "Select f.FId AS 'Faktuur ID', c.CName AS 'Client Name', f.CIdDropoff AS 'Client Dropped off'," +
+                string select = "Select f.FId AS 'Faktuur ID', c.CName + ' ' + c.CSurname AS 'Client Name', c.CCell AS 'Cell Number' ,f.CIdDropoff AS 'Client Dropped off'," +
                     " f.CIDroppedOffNumber as 'Dropped off number'" +
                     ", f.CIdPickup AS 'Client Picked Up', f.CIdPickedUpNumber as 'Picked Up Number', f.DatePickedUp  as 'Date Picked Up', f.FStatusReport AS 'Status Report'" +
-                    ", f.FActive AS 'Active', f.FTotal AS 'Total', f.FDeposit AS 'Deposit', f.FOustanding AS 'Outstanding Amount', f.FSms AS 'SMS' " +
+                    ", f.FActive AS 'Active', f.FTotal AS 'Total', f.FDeposit AS 'Deposit Payable', f.FOustanding AS 'Outstanding Amount', f.FSms AS 'SMS' " +
                     "FROM tblFaktuur f INNER JOIN tblClient c ON f.CId = c.CId WHERE f.FId LIKE '%" + Search + "%' AND f.Completed is null AND" +
                     " f.Canceled is null or c.CName LIKE '%" + Search + "%' AND f.Completed is null AND f.Canceled is null " +
                     "or f.CIdPickUp LIKE '%" + Search + "%' AND f.Completed is null AND f.Canceled is null" +
@@ -842,7 +842,8 @@ namespace Taksidermie
                     " %'or f.FOustanding LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null " +
                     "or f.CIdPickedUpNumber LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null" +
                     " or f.DatePickedUp LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null" +
-                    " or f.CIDroppedOffNumber LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null";
+                    " or f.CIDroppedOffNumber LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null " +
+                    "or c.CCell LIKE '% " + Search + " %' AND f.Completed is null AND f.Canceled is null ";
 
                 adapter = new SqlDataAdapter(select, conn);
 
@@ -1279,7 +1280,7 @@ namespace Taksidermie
             }
 
         }
-        public void AddInventory(string Item, string aType, int Amount)
+        public void AddInventory(string Item, string aType, int Amount, int faktuur)
         {
             try
             {
@@ -1287,8 +1288,8 @@ namespace Taksidermie
                 conn.Open();
 
 
-                string insert = "INSERT INTO tblInvintory (IItem, IAnimalType, IAmount)" +
-                    " VALUES('" + Item + "', '" + aType + "', " + Amount + ")";
+                string insert = "INSERT INTO tblInvintory (IItem, IAnimalType, IAmount, IFaktuurNR)" +
+                    " VALUES('" + Item + "', '" + aType + "', '" + faktuur + "', " + Amount + ")";
                 SqlCommand cmd = new SqlCommand(insert, conn);
                 cmd.ExecuteNonQuery();
 
@@ -1544,7 +1545,7 @@ namespace Taksidermie
                 conn = new SqlConnection(conString);
                 conn.Open();
 
-                string select = "SELECT m.MId, a.AAnimalType , mt.TMountType , m.MAmount " +
+                string select = "SELECT m.MId AS 'Mount ID',  a.AAnimalType  AS 'Animal Type', mt.TMountType AS 'Mount Type' , m.MAmount AS 'Amount' " +
                     "FROM tblMounts m " +
                     "INNER JOIN tblMountType mt" +
                     " ON m.TId = mt.TId " +

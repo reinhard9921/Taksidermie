@@ -328,5 +328,16 @@ namespace Taksidermie
             dgvMounts.DataSource = dh.ReadFaktuur();
             dgvMounts.DataMember = "tblFaktuur";
         }
+
+        private void YearlyIncreaseToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 frm = new Form3(id);
+            frm.Show();
+        }
     }
 }

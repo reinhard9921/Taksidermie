@@ -56,6 +56,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtClientNumber = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.cmbHandler = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrophees)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(166, 652);
+            this.label3.Location = new System.Drawing.Point(166, 634);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 17);
             this.label3.TabIndex = 4;
@@ -115,9 +117,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(316, 571);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 17);
+            this.label7.Size = new System.Drawing.Size(116, 17);
             this.label7.TabIndex = 12;
-            this.label7.Text = "Added Number";
+            this.label7.Text = "Trophee Number";
             // 
             // richeditRemarks
             // 
@@ -206,7 +208,7 @@
             // cmbMountType
             // 
             this.cmbMountType.FormattingEnabled = true;
-            this.cmbMountType.Location = new System.Drawing.Point(169, 672);
+            this.cmbMountType.Location = new System.Drawing.Point(169, 654);
             this.cmbMountType.Name = "cmbMountType";
             this.cmbMountType.Size = new System.Drawing.Size(121, 24);
             this.cmbMountType.TabIndex = 24;
@@ -215,7 +217,7 @@
             // cmbAnimalType
             // 
             this.cmbAnimalType.FormattingEnabled = true;
-            this.cmbAnimalType.Location = new System.Drawing.Point(319, 672);
+            this.cmbAnimalType.Location = new System.Drawing.Point(319, 654);
             this.cmbAnimalType.Name = "cmbAnimalType";
             this.cmbAnimalType.Size = new System.Drawing.Size(121, 24);
             this.cmbAnimalType.TabIndex = 26;
@@ -224,7 +226,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(316, 652);
+            this.label12.Location = new System.Drawing.Point(316, 634);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(86, 17);
             this.label12.TabIndex = 25;
@@ -241,7 +243,7 @@
             // 
             // txtDiscount
             // 
-            this.txtDiscount.Location = new System.Drawing.Point(469, 674);
+            this.txtDiscount.Location = new System.Drawing.Point(469, 656);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(100, 22);
             this.txtDiscount.TabIndex = 28;
@@ -250,7 +252,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(466, 654);
+            this.label13.Location = new System.Drawing.Point(466, 636);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(63, 17);
             this.label13.TabIndex = 29;
@@ -286,13 +288,13 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(9, 571);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 17);
+            this.label5.Size = new System.Drawing.Size(103, 17);
             this.label5.TabIndex = 35;
-            this.label5.Text = "Client Name";
+            this.label5.Text = "Drop Off Name";
             // 
             // txtClientNumber
             // 
-            this.txtClientNumber.Location = new System.Drawing.Point(12, 668);
+            this.txtClientNumber.Location = new System.Drawing.Point(12, 650);
             this.txtClientNumber.Name = "txtClientNumber";
             this.txtClientNumber.Size = new System.Drawing.Size(100, 22);
             this.txtClientNumber.TabIndex = 36;
@@ -300,17 +302,41 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 648);
+            this.label6.Location = new System.Drawing.Point(9, 630);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 17);
+            this.label6.Size = new System.Drawing.Size(116, 17);
             this.label6.TabIndex = 37;
-            this.label6.Text = "Client Number";
+            this.label6.Text = "Drop Off Number";
+            // 
+            // cmbHandler
+            // 
+            this.cmbHandler.FormattingEnabled = true;
+            this.cmbHandler.Items.AddRange(new object[] {
+            "André",
+            "Tracey",
+            "Edmund",
+            "Stoffel"});
+            this.cmbHandler.Location = new System.Drawing.Point(469, 720);
+            this.cmbHandler.Name = "cmbHandler";
+            this.cmbHandler.Size = new System.Drawing.Size(121, 24);
+            this.cmbHandler.TabIndex = 39;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(466, 700);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(86, 17);
+            this.label14.TabIndex = 38;
+            this.label14.Text = "Animal Type";
             // 
             // frmInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1035, 750);
+            this.Controls.Add(this.cmbHandler);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.txtClientNumber);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtClientName);
@@ -378,5 +404,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtClientNumber;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbHandler;
+        private System.Windows.Forms.Label label14;
     }
 }

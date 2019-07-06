@@ -55,6 +55,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnAddTrophee = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrophees)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,9 +158,9 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(417, 75);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(176, 55);
+            this.label8.Size = new System.Drawing.Size(271, 55);
             this.label8.TabIndex = 45;
-            this.label8.Text = "Invoice";
+            this.label8.Text = "Edit Invoice";
             // 
             // dgvTrophees
             // 
@@ -296,11 +297,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // btnAddTrophee
+            // 
+            this.btnAddTrophee.Location = new System.Drawing.Point(680, 719);
+            this.btnAddTrophee.Name = "btnAddTrophee";
+            this.btnAddTrophee.Size = new System.Drawing.Size(144, 35);
+            this.btnAddTrophee.TabIndex = 61;
+            this.btnAddTrophee.Text = "Add Trophee";
+            this.btnAddTrophee.UseVisualStyleBackColor = true;
+            this.btnAddTrophee.Click += new System.EventHandler(this.BtnAddTrophee_Click);
+            // 
             // frmEditInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1221, 766);
+            this.Controls.Add(this.btnAddTrophee);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label6);
@@ -366,5 +378,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddTrophee;
     }
 }

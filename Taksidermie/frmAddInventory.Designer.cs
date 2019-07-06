@@ -36,6 +36,8 @@
             this.cmbItem = new System.Windows.Forms.ComboBox();
             this.cmbAnimalType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtInvoiceNumber = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label8
@@ -50,7 +52,7 @@
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(76, 251);
+            this.btnAddItem.Location = new System.Drawing.Point(80, 277);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(88, 40);
             this.btnAddItem.TabIndex = 27;
@@ -77,7 +79,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 86);
+            this.label2.Location = new System.Drawing.Point(63, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 17);
             this.label2.TabIndex = 23;
@@ -92,7 +94,7 @@
             "Back Skin",
             "Pote",
             "Stert"});
-            this.cmbItem.Location = new System.Drawing.Point(74, 106);
+            this.cmbItem.Location = new System.Drawing.Point(66, 106);
             this.cmbItem.Name = "cmbItem";
             this.cmbItem.Size = new System.Drawing.Size(121, 24);
             this.cmbItem.TabIndex = 29;
@@ -100,7 +102,7 @@
             // cmbAnimalType
             // 
             this.cmbAnimalType.FormattingEnabled = true;
-            this.cmbAnimalType.Location = new System.Drawing.Point(74, 153);
+            this.cmbAnimalType.Location = new System.Drawing.Point(66, 153);
             this.cmbAnimalType.Name = "cmbAnimalType";
             this.cmbAnimalType.Size = new System.Drawing.Size(121, 24);
             this.cmbAnimalType.TabIndex = 31;
@@ -108,17 +110,35 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(71, 133);
+            this.label1.Location = new System.Drawing.Point(63, 133);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 17);
             this.label1.TabIndex = 30;
             this.label1.Text = "Animal Type";
+            // 
+            // txtInvoiceNumber
+            // 
+            this.txtInvoiceNumber.Location = new System.Drawing.Point(74, 249);
+            this.txtInvoiceNumber.Name = "txtInvoiceNumber";
+            this.txtInvoiceNumber.Size = new System.Drawing.Size(100, 22);
+            this.txtInvoiceNumber.TabIndex = 33;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(71, 229);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 17);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "Invoice Number";
             // 
             // frmAddInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(277, 329);
+            this.Controls.Add(this.txtInvoiceNumber);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbAnimalType);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbItem);
@@ -145,5 +165,7 @@
         private System.Windows.Forms.ComboBox cmbItem;
         private System.Windows.Forms.ComboBox cmbAnimalType;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtInvoiceNumber;
+        private System.Windows.Forms.Label label4;
     }
 }

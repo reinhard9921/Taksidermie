@@ -121,5 +121,25 @@ namespace Taksidermie
         {
             dh.DeleteTrophee(id);
         }
+
+        private void BtnAddTrophee_Click(object sender, EventArgs e)
+        {
+            //double CalculateTotalPrice;
+            //int invoicenumber = int.Parse(lblInvoice.Text);
+            //string number = lblInvoice.Text + "-" + txtNumber.Text;
+            //string remarks = richeditRemarks.Text;
+            //int AnimalType = dh.SelectAnimalType(cmbAnimalType.Text);
+            //int MountType = dh.SelectMountType(cmbMountType.Text);
+            //double TAdiscount = 0;
+            //TAdiscount = double.Parse(txtDiscount.Text);
+            //TAdiscount = TAdiscount / 100;
+            //TAdiscount = dh.ReadTotalPrice(AnimalType, MountType) * TAdiscount;
+            //double CalculatePrice = dh.ReadTotalPrice(AnimalType, MountType) - TAdiscount;
+            //double mountType = dh.ReturnMountType(dh.SelectAnimalType(cmbAnimalType.Text), dh.SelectMountType(cmbMountType.Text));
+            //double deposit = CalculatePrice / 2;
+            //CalculateTotalPrice =  dh.ReadTotalPrice(AnimalType, MountType);
+            //int Mount = dh.ReturnMountType(dh.SelectAnimalType(animaltype), dh.SelectMountType(mounttype));
+            //dh.Insert(lblInvoice.Text,txtNumber.Text, 1, richeditRemarks.Text, Mount, );
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace Taksidermie
             try
             {
                 int invoicenumber = int.Parse(lblInvoice.Text);
-                string number = txtNumber.Text;
+                string number = lblInvoice.Text + "-" + txtNumber.Text;
                 string remarks = richeditRemarks.Text;
                 int AnimalType = dh.SelectAnimalType(cmbAnimalType.Text);
                 int MountType = dh.SelectMountType(cmbMountType.Text);
@@ -115,7 +115,7 @@ namespace Taksidermie
                 dh.UpdateCredit(credit, ClientID);
 
             }
-            dh.InsertFaktuur(InvoiceNumber, ClientID, CalculateTotalPrice, CTotal, deposit, txtClientNumber.Text, txtClientName.Text);
+            dh.InsertFaktuur(InvoiceNumber, ClientID, CalculateTotalPrice, CTotal, deposit, txtClientNumber.Text, txtClientName.Text, cmbHandler.Text);
             this.Close();
             MyEventHandler?.Invoke();
 
